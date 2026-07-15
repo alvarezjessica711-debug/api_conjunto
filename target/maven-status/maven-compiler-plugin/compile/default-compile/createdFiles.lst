@@ -1,6 +1,9 @@
 conexion/ConexionBD.class
+vista/ApartamentoServlet.class
+vista/UsuarioServlet.class
 modelo/Paquete.class
 dao/PaqueteDAO.class
+vista/PaqueteServlet.class
 com/mycompany/api_conjunto/Api_conjunto.class
 modelo/Usuario.class
 vista/Principal.class

@@ -6,4 +6,7 @@
 /Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Apartamento.java
 /Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Paquete.java
 /Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Usuario.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/vista/ApartamentoServlet.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/vista/PaqueteServlet.java
 /Users/Yesica/NetBeansProjects/api_conjunto/src/vista/Principal.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/vista/UsuarioServlet.java

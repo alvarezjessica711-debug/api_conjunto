@@ -12,6 +12,7 @@ Este proyecto es una API REST básica desarrollada en Java con Maven para gestio
   - vista
 - API REST con servidor HTTP integrado en Java
 - Soporte para operaciones básicas de paquetes
+- Preparado para despliegue en contenedor Docker y servicios cloud como Render
 
 ## Estructura del proyecto
 
@@ -147,6 +148,37 @@ curl http://localhost:8080/api/paquetes
 - La implementación actual es una base funcional para demostrar la conexión y el consumo de datos desde una API REST.
 - Si la base de datos no está configurada correctamente, la API responderá con un error de conexión.
 - Para una versión más completa, se puede ampliar con autenticación, validaciones y respuestas JSON más ricas.
+
+## Despliegue en la nube
+
+Esta aplicación también puede desplegarse en un contenedor Docker y publicarse en servicios como Render, Railway o Fly.io.
+
+### Archivos añadidos
+
+- Dockerfile: prepara un contenedor con Jetty para ejecutar la app web.
+- render.yaml: configuración simple para publicar en Render.
+
+### Pasos recomendados
+
+1. Compilar el proyecto:
+   ```bash
+   mvn clean package
+   ```
+2. Construir la imagen:
+   ```bash
+   docker build -t api-conjunto .
+   ```
+3. Ejecutar localmente:
+   ```bash
+   docker run -p 8080:8080 api-conjunto
+   ```
+
+### Variables de entorno
+
+- DB_URL: URL completa de conexión a MySQL
+- DB_USER: usuario de MySQL
+- DB_PASSWORD: contraseña de MySQL
+- PORT: puerto que exponga la plataforma cloud si aplica
 
 ## Próximos pasos recomendados
 

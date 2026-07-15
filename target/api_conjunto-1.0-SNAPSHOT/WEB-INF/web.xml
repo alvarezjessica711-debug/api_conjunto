@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>PaqueteServlet</servlet-name>
+        <servlet-class>vista.PaqueteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PaqueteServlet</servlet-name>
+        <url-pattern>/paquetes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>vista.UsuarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/usuarios</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ApartamentoServlet</servlet-name>
+        <servlet-class>vista.ApartamentoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApartamentoServlet</servlet-name>
+        <url-pattern>/apartamentos</url-pattern>
+    </servlet-mapping>
+</web-app>

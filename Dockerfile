@@ -3,10 +3,9 @@ WORKDIR /workspace
 COPY . .
 RUN mvn -q -DskipTests package
 
-FROM jetty:12.0-jre17
-USER root
-COPY --from=build /workspace/target/api_conjunto-1.0-SNAPSHOT.war /var/lib/jetty/webapps/ROOT.war
-USER jetty
+FROM tomcat:10.1-jre17-temurin
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+COPY --from=build /workspace/target/api_conjunto-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+ENV CATALINA_OPTS="-Djava.awt.headless=true"
 EXPOSE 8080
 ENV PORT=8080
-ENV JAVA_OPTS="-Djetty.http.host=0.0.0.0 -Djetty.http.port=8080"

@@ -31,5 +31,11 @@
         <a href="${pageContext.request.contextPath}/apartamentos">Ver apartamentos</a>
         <a href="${pageContext.request.contextPath}/apartamentos?action=nuevo">Registrar apartamento</a>
     </div>
+
+    <div class="card">
+        <h2>Roles</h2>
+        <a href="${pageContext.request.contextPath}/roles">Ver roles</a>
+        <a href="${pageContext.request.contextPath}/roles?action=nuevo">Registrar rol</a>
+    </div>
 </body>
 </html>

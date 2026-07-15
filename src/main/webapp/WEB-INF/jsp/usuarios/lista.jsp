@@ -31,6 +31,10 @@
                 <td>${usuario.email}</td>
                 <td>${usuario.telefono}</td>
                 <td>${usuario.estado}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/usuarios?action=editar&id=${usuario.idUsuario}">Editar</a>
+                    <a href="${pageContext.request.contextPath}/usuarios?action=eliminar&id=${usuario.idUsuario}" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

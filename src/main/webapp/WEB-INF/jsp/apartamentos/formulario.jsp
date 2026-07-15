@@ -17,10 +17,11 @@
         <p style="color:red">${error}</p>
     </c:if>
     <form method="post" action="${pageContext.request.contextPath}/apartamentos">
+        <input type="hidden" name="idApartamento" value="${apartamento != null ? apartamento.idApartamento : ''}">
         <label>Torre</label>
-        <input type="text" name="torre" required>
+        <input type="text" name="torre" value="${apartamento != null ? apartamento.torre : ''}" required>
         <label>Número</label>
-        <input type="text" name="numero" required>
+        <input type="text" name="numero" value="${apartamento != null ? apartamento.numero : ''}" required>
         <button type="submit">Guardar</button>
     </form>
 </body>

@@ -1,7 +1,7 @@
 package dao;
 
 import conexion.ConexionBD;
-import modelo.Apartamento;
+import modelo.Rol;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,24 +11,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApartamentoDAO {
+public class RolDAO {
 
-    public List<Apartamento> listar() throws SQLException {
-        List<Apartamento> apartamentos = new ArrayList<>();
-        String sql = "SELECT id_apartamento, torre, numero FROM apartamentos ORDER BY id_apartamento";
+    public List<Rol> listar() throws SQLException {
+        List<Rol> roles = new ArrayList<>();
+        String sql = "SELECT id_rol, nombre_rol FROM roles ORDER BY id_rol";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                apartamentos.add(mapear(rs));
+                roles.add(mapear(rs));
             }
         }
-        return apartamentos;
+        return roles;
     }
 
-    public Apartamento obtenerPorId(int id) throws SQLException {
-        String sql = "SELECT id_apartamento, torre, numero FROM apartamentos WHERE id_apartamento = ?";
+    public Rol obtenerPorId(int id) throws SQLException {
+        String sql = "SELECT id_rol, nombre_rol FROM roles WHERE id_rol = ?";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -42,13 +42,12 @@ public class ApartamentoDAO {
         return null;
     }
 
-    public int insertar(Apartamento apartamento) throws SQLException {
-        String sql = "INSERT INTO apartamentos (torre, numero) VALUES (?, ?)";
+    public int insertar(Rol rol) throws SQLException {
+        String sql = "INSERT INTO roles (nombre_rol) VALUES (?)";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, apartamento.getTorre());
-            stmt.setString(2, apartamento.getNumero());
+            stmt.setString(1, rol.getNombreRol());
             stmt.executeUpdate();
 
             try (ResultSet keys = stmt.getGeneratedKeys()) {
@@ -60,20 +59,19 @@ public class ApartamentoDAO {
         return 0;
     }
 
-    public boolean actualizar(Apartamento apartamento) throws SQLException {
-        String sql = "UPDATE apartamentos SET torre = ?, numero = ? WHERE id_apartamento = ?";
+    public boolean actualizar(Rol rol) throws SQLException {
+        String sql = "UPDATE roles SET nombre_rol = ? WHERE id_rol = ?";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, apartamento.getTorre());
-            stmt.setString(2, apartamento.getNumero());
-            stmt.setInt(3, apartamento.getIdApartamento());
+            stmt.setString(1, rol.getNombreRol());
+            stmt.setInt(2, rol.getIdRol());
             return stmt.executeUpdate() > 0;
         }
     }
 
     public boolean eliminar(int id) throws SQLException {
-        String sql = "DELETE FROM apartamentos WHERE id_apartamento = ?";
+        String sql = "DELETE FROM roles WHERE id_rol = ?";
 
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -82,11 +80,10 @@ public class ApartamentoDAO {
         }
     }
 
-    private Apartamento mapear(ResultSet rs) throws SQLException {
-        Apartamento apartamento = new Apartamento();
-        apartamento.setIdApartamento(rs.getInt("id_apartamento"));
-        apartamento.setTorre(rs.getString("torre"));
-        apartamento.setNumero(rs.getString("numero"));
-        return apartamento;
+    private Rol mapear(ResultSet rs) throws SQLException {
+        Rol rol = new Rol();
+        rol.setIdRol(rs.getInt("id_rol"));
+        rol.setNombreRol(rs.getString("nombre_rol"));
+        return rol;
     }
 }

@@ -18,9 +18,33 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        String idParam = request.getParameter("id");
 
         if ("nuevo".equals(action)) {
             request.getRequestDispatcher("/WEB-INF/jsp/usuarios/formulario.jsp").forward(request, response);
+            return;
+        }
+
+        if ("editar".equals(action) && idParam != null) {
+            try {
+                Usuario usuario = usuarioDAO.obtenerPorId(Integer.parseInt(idParam));
+                request.setAttribute("usuario", usuario);
+                request.getRequestDispatcher("/WEB-INF/jsp/usuarios/formulario.jsp").forward(request, response);
+            } catch (SQLException e) {
+                request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("/WEB-INF/jsp/usuarios/lista.jsp").forward(request, response);
+            }
+            return;
+        }
+
+        if ("eliminar".equals(action) && idParam != null) {
+            try {
+                usuarioDAO.eliminar(Integer.parseInt(idParam));
+                response.sendRedirect(request.getContextPath() + "/usuarios");
+            } catch (SQLException e) {
+                request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("/WEB-INF/jsp/usuarios/lista.jsp").forward(request, response);
+            }
             return;
         }
 
@@ -38,6 +62,10 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Usuario usuario = new Usuario();
+            String idParam = request.getParameter("idUsuario");
+            if (idParam != null && !idParam.isBlank()) {
+                usuario.setIdUsuario(Integer.parseInt(idParam));
+            }
             usuario.setIdRol(1);
             usuario.setDocumento(request.getParameter("documento"));
             usuario.setNombreCompleto(request.getParameter("nombreCompleto"));
@@ -45,9 +73,14 @@ public class UsuarioServlet extends HttpServlet {
             usuario.setTelefono(request.getParameter("telefono"));
             usuario.setEstado(request.getParameter("estado"));
 
-            int id = usuarioDAO.insertar(usuario);
-            request.getSession().setAttribute("mensaje", "Usuario registrado correctamente con ID " + id);
-            response.sendRedirect(request.getContextPath() + "/usuarios");
+            if (usuario.getIdUsuario() > 0) {
+                usuarioDAO.actualizar(usuario);
+                response.sendRedirect(request.getContextPath() + "/usuarios");
+            } else {
+                int id = usuarioDAO.insertar(usuario);
+                request.getSession().setAttribute("mensaje", "Usuario registrado correctamente con ID " + id);
+                response.sendRedirect(request.getContextPath() + "/usuarios");
+            }
         } catch (SQLException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/jsp/usuarios/formulario.jsp").forward(request, response);

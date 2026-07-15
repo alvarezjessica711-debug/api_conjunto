@@ -34,4 +34,13 @@
         <servlet-name>ApartamentoServlet</servlet-name>
         <url-pattern>/apartamentos</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RolServlet</servlet-name>
+        <servlet-class>vista.RolServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RolServlet</servlet-name>
+        <url-pattern>/roles</url-pattern>
+    </servlet-mapping>
 </web-app>

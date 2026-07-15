@@ -25,6 +25,10 @@
                 <td>${apartamento.idApartamento}</td>
                 <td>${apartamento.torre}</td>
                 <td>${apartamento.numero}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/apartamentos?action=editar&id=${apartamento.idApartamento}">Editar</a>
+                    <a href="${pageContext.request.contextPath}/apartamentos?action=eliminar&id=${apartamento.idApartamento}" onclick="return confirm('¿Eliminar este apartamento?')">Eliminar</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

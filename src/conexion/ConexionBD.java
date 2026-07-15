@@ -10,11 +10,11 @@ public class ConexionBD {
     private static final String DEFAULT_USER = "avnadmin";
 
     public static Connection getConnection() throws SQLException {
-        String url = firstNonBlank(
+        String url = normalizeDatabaseUrl(firstNonBlank(
                 System.getenv("DB_URL"),
                 System.getProperty("DB_URL"),
                 DEFAULT_URL
-        );
+        ));
         String user = firstNonBlank(
                 System.getenv("DB_USER"),
                 System.getProperty("DB_USER"),
@@ -45,5 +45,22 @@ public class ConexionBD {
             }
         }
         return null;
+    }
+
+    private static String normalizeDatabaseUrl(String rawUrl) {
+        if (rawUrl == null || rawUrl.isBlank()) {
+            return null;
+        }
+
+        String normalized = rawUrl.trim();
+        if (normalized.startsWith("jdbc:")) {
+            return normalized;
+        }
+
+        if (normalized.startsWith("mysql://")) {
+            return "jdbc:" + normalized;
+        }
+
+        return normalized;
     }
 }

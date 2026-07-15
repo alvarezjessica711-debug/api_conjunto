@@ -17,6 +17,13 @@ public class ApartamentoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("nuevo".equals(action)) {
+            request.getRequestDispatcher("/WEB-INF/jsp/apartamentos/formulario.jsp").forward(request, response);
+            return;
+        }
+
         try {
             List<Apartamento> apartamentos = apartamentoDAO.listar();
             request.setAttribute("apartamentos", apartamentos);
@@ -24,6 +31,22 @@ public class ApartamentoServlet extends HttpServlet {
         } catch (SQLException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/jsp/apartamentos/lista.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Apartamento apartamento = new Apartamento();
+            apartamento.setTorre(request.getParameter("torre"));
+            apartamento.setNumero(request.getParameter("numero"));
+
+            int id = apartamentoDAO.insertar(apartamento);
+            request.getSession().setAttribute("mensaje", "Apartamento registrado correctamente con ID " + id);
+            response.sendRedirect(request.getContextPath() + "/apartamentos");
+        } catch (SQLException e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/jsp/apartamentos/formulario.jsp").forward(request, response);
         }
     }
 }

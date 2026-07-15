@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Apartamentos</h1>
-    <p><a href="${pageContext.request.contextPath}/">Volver al inicio</a></p>
+    <p><a href="${pageContext.request.contextPath}/">Volver al inicio</a> | <a href="${pageContext.request.contextPath}/apartamentos?action=nuevo">Registrar apartamento</a></p>
     <table>
         <tr>
             <th>ID</th>

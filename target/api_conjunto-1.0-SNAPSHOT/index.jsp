@@ -23,11 +23,13 @@
     <div class="card">
         <h2>Usuarios</h2>
         <a href="${pageContext.request.contextPath}/usuarios">Ver usuarios</a>
+        <a href="${pageContext.request.contextPath}/usuarios?action=nuevo">Registrar usuario</a>
     </div>
 
     <div class="card">
         <h2>Apartamentos</h2>
         <a href="${pageContext.request.contextPath}/apartamentos">Ver apartamentos</a>
+        <a href="${pageContext.request.contextPath}/apartamentos?action=nuevo">Registrar apartamento</a>
     </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,24 @@ public class ApartamentoDAO {
             }
         }
         return null;
+    }
+
+    public int insertar(Apartamento apartamento) throws SQLException {
+        String sql = "INSERT INTO apartamentos (torre, numero) VALUES (?, ?)";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, apartamento.getTorre());
+            stmt.setString(2, apartamento.getNumero());
+            stmt.executeUpdate();
+
+            try (ResultSet keys = stmt.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getInt(1);
+                }
+            }
+        }
+        return 0;
     }
 
     private Apartamento mapear(ResultSet rs) throws SQLException {

@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Usuarios</h1>
-    <p><a href="${pageContext.request.contextPath}/">Volver al inicio</a></p>
+    <p><a href="${pageContext.request.contextPath}/">Volver al inicio</a> | <a href="${pageContext.request.contextPath}/usuarios?action=nuevo">Registrar usuario</a></p>
     <table>
         <tr>
             <th>ID</th>

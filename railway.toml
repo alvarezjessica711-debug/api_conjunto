@@ -3,3 +3,4 @@ builder = "dockerfile"
 
 [deploy]
 startCommand = ""
+healthcheckPath = "/"

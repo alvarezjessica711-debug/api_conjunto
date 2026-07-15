@@ -1,0 +1,9 @@
+/Users/Yesica/NetBeansProjects/api_conjunto/src/com/mycompany/api_conjunto/Api_conjunto.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/conexion/ConexionBD.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/dao/ApartamentoDAO.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/dao/PaqueteDAO.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/dao/UsuarioDAO.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Apartamento.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Paquete.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/modelo/Usuario.java
+/Users/Yesica/NetBeansProjects/api_conjunto/src/vista/Principal.java
